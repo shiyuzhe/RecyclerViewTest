@@ -1,9 +1,11 @@
-package com.example.administrator.recyclerviewtest;
+package com.example.administrator.recyclerviewtest.order;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.administrator.recyclerviewtest.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.administrator.recyclerviewtest.bean.Data;
+
 import java.util.List;
 
 /**
@@ -157,7 +159,6 @@ public class TestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             header = (TextView) view.findViewById(R.id.header);
         }
     }
-
     // // 底部footView的ViewHolder，用以缓存findView操作
     class FootHolder extends RecyclerView.ViewHolder {
         private TextView tips;
@@ -166,5 +167,6 @@ public class TestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tips = (TextView) itemView.findViewById(R.id.tips);
         }
     }
+
 
 }

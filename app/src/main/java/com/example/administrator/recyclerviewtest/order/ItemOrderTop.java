@@ -1,8 +1,10 @@
-package com.example.administrator.recyclerviewtest;
+package com.example.administrator.recyclerviewtest.order;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import com.example.administrator.recyclerviewtest.R;
 
 /**
  * 订单布局-top

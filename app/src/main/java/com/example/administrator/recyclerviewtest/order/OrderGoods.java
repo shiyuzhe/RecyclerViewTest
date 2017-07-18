@@ -1,4 +1,4 @@
-package com.example.administrator.recyclerviewtest;
+package com.example.administrator.recyclerviewtest.order;
 
 /**
  * 商品信息

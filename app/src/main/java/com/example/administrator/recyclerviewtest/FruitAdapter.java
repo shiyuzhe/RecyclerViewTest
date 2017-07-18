@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.administrator.recyclerviewtest.bean.Fruit;
+
 import java.util.ArrayList;
 import java.util.List;
 

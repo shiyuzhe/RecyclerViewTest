@@ -10,6 +10,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import com.example.administrator.recyclerviewtest.order.OrderContent;
+import com.example.administrator.recyclerviewtest.order.OrderGoods;
+import com.example.administrator.recyclerviewtest.order.ItemOrderIn;
+
 import java.util.ArrayList;
 import java.util.List;
 

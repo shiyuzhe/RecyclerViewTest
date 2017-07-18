@@ -12,7 +12,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
+import com.example.administrator.recyclerviewtest.bean.Fruit;
+import com.example.administrator.recyclerviewtest.decoration.MyPaddingDecoration;
+import com.example.administrator.recyclerviewtest.decoration.TimeLineDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,20 +41,60 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         findView();
         initRefreshLayout();
         initFruit();
-        initRecyclerView();
+//        initRecyclerView();
 
         //线性布局
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 //        //设置布局排列方向，默认纵向
 //        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        //瀑布流布局
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
-        //网格布局
-//        GridLayoutManager layoutManager = new GridLayoutManager(this,3);
+//        网格布局
+//        GridLayoutManager layoutManager = new GridLayoutManager(this,3)
+//          瀑布流布局
+        final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new FruitAdapter(getDatas(0, PAGE_COUNT), this, getDatas(0, PAGE_COUNT).size() > 0 ? true : false);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new TimeLineDecoration(this,56));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //未隐藏底部提示时,lastVisibleItem是footview,
+                    if (!adapter.isFadeTips() && lastVisibleItem + 1 == adapter.getItemCount()) {
+                        Log.i(Tag,"lastVisibleItem+1:"+lastVisibleItem);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateRecyclerView(adapter.getRealLastPosition(), adapter.getRealLastPosition() + PAGE_COUNT);
+                            }
+                        }, 500);
+                    }
+
+                    if (adapter.isFadeTips() && lastVisibleItem + 2 == adapter.getItemCount()) {
+                        Log.i(Tag,"lastVisibleItem+2:"+lastVisibleItem);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateRecyclerView(adapter.getRealLastPosition(), adapter.getRealLastPosition() + PAGE_COUNT);
+                            }
+                        }, 500);
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                //                lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+                int[] poss=  layoutManager.findLastVisibleItemPositions(null);
+                lastVisibleItem=  poss[0];
+            }
+        });
     }
 
     private void initFruit() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             Fruit apple = new Fruit(getRamdomLengthname("apple"), R.mipmap.ic_launcher);
             fruits.add(apple);
             Fruit banana = new Fruit(getRamdomLengthname("banana"), R.mipmap.ic_launcher);
@@ -67,7 +110,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private String getRamdomLengthname(String name) {
         Random random = new Random();
-        int length = random.nextInt(20) + 1;
+//        int length = random.nextInt(20) + 1;
+        int length=10;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
             builder.append(name);
@@ -102,12 +146,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void initRecyclerView() {
+//        adapter = new FruitAdapter(getDatas(0, PAGE_COUNT), this, getDatas(0, PAGE_COUNT).size() > 0 ? true : false);
+//        mLayoutManager = new GridLayoutManager(this, 1);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        //设置padding
+//        recyclerView.addItemDecoration(new MyPaddingDecoration(this));
+//        recyclerView.setAdapter(adapter);
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
         adapter = new FruitAdapter(getDatas(0, PAGE_COUNT), this, getDatas(0, PAGE_COUNT).size() > 0 ? true : false);
-        mLayoutManager = new GridLayoutManager(this, 1);
-        recyclerView.setLayoutManager(mLayoutManager);
-        //设置padding
-        recyclerView.addItemDecoration(new MyPaddingDecoration(this));
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new TimeLineDecoration(this,56));
+
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

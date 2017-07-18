@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.recyclerviewtest.order.OrderContent;
+
 
 public class MyAdapter2 extends RecyclerView.Adapter<MyAdapter2.MyViewHolder> {
 

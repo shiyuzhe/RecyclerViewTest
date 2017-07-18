@@ -1,4 +1,4 @@
-package com.example.administrator.recyclerviewtest;
+package com.example.administrator.recyclerviewtest.bean;
 
 /**
  * Created by Administrator on 2017/4/4.

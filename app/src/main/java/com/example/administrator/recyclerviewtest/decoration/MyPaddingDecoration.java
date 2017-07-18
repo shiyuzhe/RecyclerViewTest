@@ -1,9 +1,11 @@
-package com.example.administrator.recyclerviewtest;
+package com.example.administrator.recyclerviewtest.decoration;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.example.administrator.recyclerviewtest.R;
 
 /**
  * Created by Administrator on 2017/6/21.
